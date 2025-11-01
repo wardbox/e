@@ -1,3 +1,10 @@
+export interface EndpointEvent {
+  timestamp: Date;
+  type: 'spawn' | 'success' | 'failure' | 'evolution' | 'check';
+  health: number;
+  message: string;
+}
+
 export interface Endpoint {
   path: string;
   code: string;
@@ -9,6 +16,7 @@ export interface Endpoint {
   isEvolving: boolean;
   prNumber?: number;
   desperation: number;
+  timeline: EndpointEvent[];
 }
 
 export interface DramaEvent {
