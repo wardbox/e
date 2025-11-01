@@ -1,0 +1,381 @@
+[
+  {
+    "path": "/reverse",
+    "code": "if (typeof input !== 'string') {\n  return '';\n}\nreturn input.split('').reverse().join('');",
+    "health": 65,
+    "uses": 10,
+    "failures": 10,
+    "lastUsed": "2025-11-01T04:46:17.053Z",
+    "isEvolving": false,
+    "desperation": 10,
+    "lastError": "null is not an object (evaluating 'input.split')",
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T04:46:17.053Z",
+        "type": "success",
+        "health": 65,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:16.264Z",
+        "type": "success",
+        "health": 60,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:44:22.028Z",
+        "type": "success",
+        "health": 55,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:44:18.998Z",
+        "type": "success",
+        "health": 50,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:44:14.220Z",
+        "type": "success",
+        "health": 45,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:44:11.388Z",
+        "type": "success",
+        "health": 40,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:44:09.880Z",
+        "type": "success",
+        "health": 35,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:44:02.932Z",
+        "type": "success",
+        "health": 30,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:44:00.787Z",
+        "type": "success",
+        "health": 25,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:56.813Z",
+        "type": "evolution",
+        "health": 20,
+        "message": "Evolved by Claude AI. Health restored to 20%"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:55.679Z",
+        "type": "check",
+        "health": 0,
+        "message": "Evolution criteria met: health=0%, failures=10 > successes=-9"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:49.394Z",
+        "type": "failure",
+        "health": 0,
+        "message": "null is not an object (evaluating 'input.split')"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:41.156Z",
+        "type": "failure",
+        "health": 10,
+        "message": "null is not an object (evaluating 'input.split')"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:37.671Z",
+        "type": "failure",
+        "health": 20,
+        "message": "null is not an object (evaluating 'input.split')"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:35.410Z",
+        "type": "failure",
+        "health": 30,
+        "message": "null is not an object (evaluating 'input.split')"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:30.747Z",
+        "type": "failure",
+        "health": 40,
+        "message": "null is not an object (evaluating 'input.split')"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:28.878Z",
+        "type": "failure",
+        "health": 50,
+        "message": "null is not an object (evaluating 'input.split')"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:27.129Z",
+        "type": "failure",
+        "health": 60,
+        "message": "null is not an object (evaluating 'input.split')"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:25.256Z",
+        "type": "failure",
+        "health": 70,
+        "message": "null is not an object (evaluating 'input.split')"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:16.661Z",
+        "type": "failure",
+        "health": 80,
+        "message": "null is not an object (evaluating 'input.split')"
+      }
+    ]
+  },
+  {
+    "path": "/",
+    "code": "actions.return(\"Hello, World!\");",
+    "health": 100,
+    "uses": 6,
+    "failures": 0,
+    "lastUsed": "2025-11-01T04:29:07.433Z",
+    "isEvolving": false,
+    "desperation": 0
+  },
+  {
+    "path": "/favicon.ico",
+    "code": "actions.return({\n  status: 404,\n  headers: {\n    'Content-Type': 'text/plain'\n  },\n  body: 'Not Found'\n});",
+    "health": 100,
+    "uses": 14,
+    "failures": 0,
+    "lastUsed": "2025-11-01T04:53:34.841Z",
+    "isEvolving": false,
+    "desperation": 0,
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T04:53:34.841Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:36.928Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:36.260Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:35.717Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:34.332Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:43:13.539Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      }
+    ]
+  },
+  {
+    "path": "/uppercase",
+    "code": "if (!input) {\n  return ''\n}\nreturn input.toUpperCase()",
+    "health": 100,
+    "uses": 17,
+    "failures": 6,
+    "lastUsed": "2025-11-01T04:53:39.592Z",
+    "isEvolving": false,
+    "desperation": 6,
+    "lastError": "null is not an object (evaluating 'input.toUpperCase')",
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T04:53:39.592Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:53:39.420Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:53:39.103Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:53:38.861Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:53:38.645Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:53:37.920Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:43.440Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      }
+    ]
+  },
+  {
+    "path": "/divide",
+    "code": "if (!input || !input.dividend || !input.divisor) {\n  return actions.return({ error: \"Invalid input\" });\n}\nif (input.divisor === 0) {\n  return actions.return({ error: \"Division by zero is not allowed\" });\n}\nconst result = parseFloat(input.dividend) / parseFloat(input.divisor);\nreturn actions.return({ result: Number(result.toFixed(2)) });",
+    "health": 100,
+    "uses": 15,
+    "failures": 21,
+    "lastUsed": "2025-11-01T04:47:24.013Z",
+    "isEvolving": false,
+    "desperation": 21,
+    "lastError": "Cannot declare a const variable twice: 'input'.",
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T04:47:24.013Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:47:21.627Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:37:14.295Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:37:12.946Z",
+        "type": "success",
+        "health": 95,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:37:11.594Z",
+        "type": "success",
+        "health": 90,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:37:00.502Z",
+        "type": "success",
+        "health": 85,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:36:58.295Z",
+        "type": "success",
+        "health": 80,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:36:56.153Z",
+        "type": "success",
+        "health": 75,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:36:47.766Z",
+        "type": "success",
+        "health": 70,
+        "message": "Executed successfully"
+      }
+    ]
+  },
+  {
+    "path": "/hello",
+    "code": "{\n    return actions.return('Hello, World!');\n}",
+    "health": 100,
+    "uses": 20,
+    "failures": 0,
+    "lastUsed": "2025-11-01T04:48:31.966Z",
+    "isEvolving": false,
+    "desperation": 0,
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T04:48:31.966Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:47:41.069Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:47:40.280Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:58.570Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:58.330Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:57.810Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:56.147Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:46:48.642Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T04:42:40.146Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      }
+    ]
+  }
+]

@@ -6,7 +6,8 @@
     "dev:server": "bun run --watch src/server.ts",
     "dev:client": "cd client && bun run dev",
     "build": "bun build src/server.ts --outdir dist --target bun && cd client && bun run build",
-    "start": "bun dist/server.js"
+    "start": "bun dist/server.js",
+    "test": "bun test src/endpoints.test.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.68.0",
