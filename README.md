@@ -17,13 +17,12 @@
 # Install
 bun install
 
-# Dev (both servers)
-bun run dev              # Backend (Hono on :3000)
-cd client && bun run dev  # Frontend (Vite on :5173)
+# Dev (run in separate terminals)
+bun run dev:server  # Terminal 1: Backend (Hono on :3000)
+bun run dev:client  # Terminal 2: Frontend (Vite on :5173)
 
 # Build
 bun run build
-cd client && bun run build
 ```
 
 ## Environment
@@ -35,7 +34,7 @@ cp .env.example .env
 
 ## Structure
 
-```
+```text
 endpoint-evolution/
 ├── src/
 │   └── server.ts       # Hono API server

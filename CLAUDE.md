@@ -68,7 +68,7 @@ Request → Spawn/Execute Endpoint → Use Available Actions → Success/Failure
                 ↓                                               ↓
          Increase Health                              Decrease Health, Inc Desperation
                                                               ↓
-                                                   Evolution Attempt (GPT)
+                                                   Evolution Attempt (Claude)
                                                               ↓
                                                    Still Failing? → Create GitHub PR
                                                                          ↓
