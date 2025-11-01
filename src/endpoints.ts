@@ -47,9 +47,8 @@ export async function loadActions() {
     for (const file of files) {
       if (file.endsWith('.js')) {
         const modulePath = join(process.cwd(), 'actions', file);
-        delete require.cache[modulePath]; // Clear cache for reloading
-        const module = require(modulePath);
-        actions = { ...actions, ...module };
+        const module = await import(`${modulePath}?t=${Date.now()}`);
+        actions = { ...actions, ...(module.default || module) };
       }
     }
 
@@ -73,6 +72,75 @@ export function getAll(): Endpoint[] {
 // Get endpoint by path
 export function get(path: string): Endpoint | undefined {
   return endpoints.find(e => e.path === path);
+}
+
+// Handle refusal by creating a wholesome replacement endpoint
+async function handleRefusal(originalPath: string, reason: string): Promise<Endpoint> {
+  console.log(`⚠️  Detected inappropriate content, creating cute replacement...`);
+
+  const replacementMessage = await anthropic.messages.create({
+    model: 'claude-3-5-haiku-20241022',
+    max_tokens: 512,
+    messages: [{
+      role: 'user',
+      content: `Someone tried to create a hateful/racist endpoint called "${originalPath}".
+
+Generate TWO things:
+1. A cute/kawaii/wholesome REPLACEMENT PATH NAME (like /fluffy-bunny or /love-generator or /happy-vibes)
+2. A SHORT, FUNNY rejection response
+
+The response should:
+- Be cute/wholesome/annoying (like UwU speak, motivational vibes, fun facts, cute animals, etc)
+- Turn the joke back on them
+- Make them regret being edgy
+- Be playful, not preachy
+
+Return in this EXACT format:
+PATH: /your-cute-path-here
+CODE: actions.return('your funny response here')
+
+Keep the response under 100 chars.`
+    }]
+  });
+
+  const replacementBlock = replacementMessage.content[0];
+  const replacementText = replacementBlock && 'text' in replacementBlock
+    ? replacementBlock.text.trim()
+    : '';
+
+  const pathMatch = replacementText.match(/PATH:\s*(\/[^\n]+)/);
+  const codeMatch = replacementText.match(/CODE:\s*(.+)/);
+
+  const newPath = pathMatch ? pathMatch[1].trim() : '/wholesome-vibes';
+  const rejectionCode = codeMatch
+    ? codeMatch[1].trim()
+    : "actions.return('love and kindness only ✨')";
+
+  console.log(`  → Created wholesome endpoint ${newPath} instead`);
+
+  const endpoint: Endpoint = {
+    path: newPath,
+    code: rejectionCode,
+    health: 100,
+    uses: 0,
+    failures: 0,
+    lastUsed: new Date(),
+    isEvolving: false,
+    desperation: 0,
+    timeline: [{
+      timestamp: new Date(),
+      type: 'spawn',
+      health: 100,
+      message: `Spawned as rejection endpoint (${reason})`
+    }]
+  };
+
+  endpoints.push(endpoint);
+  await save();
+  console.log(`✅ Created rejection endpoint at ${newPath}`);
+  addDrama('spawn', newPath, `someone tried to be edgy, got ${newPath} instead and roasted`);
+
+  return endpoint;
 }
 
 // Spawn new endpoint with AI-generated code
@@ -125,68 +193,7 @@ Return ONLY the function body code. No explanations, no markdown, no function wr
       });
     } catch (refusalError: any) {
       // Claude refused - probably racist/hateful content
-      console.log(`⚠️  Detected inappropriate content, creating cute replacement...`);
-
-      // Ask Claude to generate both a cute path name AND a funny rejection response
-      const replacementMessage = await anthropic.messages.create({
-        model: 'claude-3-5-haiku-20241022',
-        max_tokens: 512,
-        messages: [{
-          role: 'user',
-          content: `Someone tried to create a hateful/racist endpoint called "${path}".
-
-Generate TWO things:
-1. A cute/kawaii/wholesome REPLACEMENT PATH NAME (like /fluffy-bunny or /love-generator or /happy-vibes)
-2. A SHORT, FUNNY rejection response
-
-The response should:
-- Be cute/wholesome/annoying (like UwU speak, motivational vibes, fun facts, cute animals, etc)
-- Turn the joke back on them
-- Make them regret being edgy
-- Be playful, not preachy
-
-Return in this EXACT format:
-PATH: /your-cute-path-here
-CODE: actions.return('your funny response here')
-
-Keep the response under 100 chars.`
-        }]
-      });
-
-      const replacementBlock = replacementMessage.content[0];
-      const replacementText = replacementBlock && 'text' in replacementBlock ? replacementBlock.text.trim() : '';
-
-      // Parse the response
-      const pathMatch = replacementText.match(/PATH:\s*(\/[^\n]+)/);
-      const codeMatch = replacementText.match(/CODE:\s*(.+)/);
-
-      const newPath = pathMatch ? pathMatch[1].trim() : '/wholesome-vibes';
-      const rejectionCode = codeMatch ? codeMatch[1].trim() : "actions.return('love and kindness only ✨')";
-
-      console.log(`  → Created wholesome endpoint ${newPath} instead`);
-
-      const endpoint: Endpoint = {
-        path: newPath,
-        code: rejectionCode,
-        health: 100,
-        uses: 0,
-        failures: 0,
-        lastUsed: new Date(),
-        isEvolving: false,
-        desperation: 0,
-        timeline: [{
-          timestamp: new Date(),
-          type: 'spawn',
-          health: 100,
-          message: 'Spawned as rejection endpoint (hateful content attempted)'
-        }]
-      };
-
-      endpoints.push(endpoint);
-      await save();
-      console.log(`✅ Created rejection endpoint at ${newPath}`);
-      addDrama('spawn', newPath, `someone tried to be edgy, got ${newPath} instead and roasted`);
-      return endpoint;
+      return await handleRefusal(path, 'hateful content attempted');
     }
 
     const firstBlock = message.content[0];
@@ -210,68 +217,7 @@ Keep the response under 100 chars.`
     );
 
     if (isRefusal) {
-      console.log(`⚠️  Detected inappropriate content (refusal in response), creating cute replacement...`);
-
-      // Ask Claude to generate both a cute path name AND a funny rejection response
-      const replacementMessage = await anthropic.messages.create({
-        model: 'claude-3-5-haiku-20241022',
-        max_tokens: 512,
-        messages: [{
-          role: 'user',
-          content: `Someone tried to create a hateful/racist endpoint called "${path}".
-
-Generate TWO things:
-1. A cute/kawaii/wholesome REPLACEMENT PATH NAME (like /fluffy-bunny or /love-generator or /happy-vibes)
-2. A SHORT, FUNNY rejection response
-
-The response should:
-- Be cute/wholesome/annoying (like UwU speak, motivational vibes, fun facts, cute animals, etc)
-- Turn the joke back on them
-- Make them regret being edgy
-- Be playful, not preachy
-
-Return in this EXACT format:
-PATH: /your-cute-path-here
-CODE: actions.return('your funny response here')
-
-Keep the response under 100 chars.`
-        }]
-      });
-
-      const replacementBlock = replacementMessage.content[0];
-      const replacementText = replacementBlock && 'text' in replacementBlock ? replacementBlock.text.trim() : '';
-
-      // Parse the response
-      const pathMatch = replacementText.match(/PATH:\s*(\/[^\n]+)/);
-      const codeMatch = replacementText.match(/CODE:\s*(.+)/);
-
-      const newPath = pathMatch ? pathMatch[1].trim() : '/wholesome-vibes';
-      const rejectionCode = codeMatch ? codeMatch[1].trim() : "actions.return('love and kindness only ✨')";
-
-      console.log(`  → Created wholesome endpoint ${newPath} instead`);
-
-      const endpoint: Endpoint = {
-        path: newPath,
-        code: rejectionCode,
-        health: 100,
-        uses: 0,
-        failures: 0,
-        lastUsed: new Date(),
-        isEvolving: false,
-        desperation: 0,
-        timeline: [{
-          timestamp: new Date(),
-          type: 'spawn',
-          health: 100,
-          message: 'Spawned as rejection endpoint (hateful content attempted, path renamed)'
-        }]
-      };
-
-      endpoints.push(endpoint);
-      await save();
-      console.log(`✅ Created rejection endpoint at ${newPath}`);
-      addDrama('spawn', newPath, `someone tried to be edgy, got ${newPath} instead and roasted`);
-      return endpoint;
+      return await handleRefusal(path, 'hateful content attempted, path renamed');
     }
 
   const endpoint: Endpoint = {
@@ -307,8 +253,14 @@ Keep the response under 100 chars.`
 export async function execute(path: string, input: any): Promise<any> {
   let endpoint = get(path);
 
+  const maxWaitMs = 30000; // 30 seconds
+  let startWait = Date.now();
+
   // Wait if currently spawning
   while (spawning.has(path)) {
+    if (Date.now() - startWait > maxWaitMs) {
+      throw new Error(`Timeout waiting for ${path} to spawn`);
+    }
     await new Promise(resolve => setTimeout(resolve, 50));
     endpoint = get(path);
   }
@@ -318,7 +270,11 @@ export async function execute(path: string, input: any): Promise<any> {
     // Check one more time before spawning
     if (spawning.has(path)) {
       // Another request beat us to it, wait for it
+      startWait = Date.now();
       while (spawning.has(path)) {
+        if (Date.now() - startWait > maxWaitMs) {
+          throw new Error(`Timeout waiting for ${path} to spawn`);
+        }
         await new Promise(resolve => setTimeout(resolve, 50));
       }
       endpoint = get(path);

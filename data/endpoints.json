@@ -135,13 +135,115 @@
   {
     "path": "/",
     "code": "actions.return(\"Hello, World!\");",
-    "health": 85,
+    "health": 35,
     "uses": 6,
     "failures": 0,
     "lastUsed": "2025-11-01T04:29:07.433Z",
     "isEvolving": false,
     "desperation": 0,
     "timeline": [
+      {
+        "timestamp": "2025-11-01T05:47:10.081Z",
+        "type": "check",
+        "health": 35,
+        "message": "Checked for evolution: Not eligible yet (health=35%, failures=0, successes=6)"
+      },
+      {
+        "timestamp": "2025-11-01T05:46:31.715Z",
+        "type": "check",
+        "health": 35,
+        "message": "Checked for evolution: Not eligible yet (health=35%, failures=0, successes=6)"
+      },
+      {
+        "timestamp": "2025-11-01T05:46:31.713Z",
+        "type": "check",
+        "health": 35,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:46:01.713Z",
+        "type": "check",
+        "health": 40,
+        "message": "Checked for evolution: Not eligible yet (health=40%, failures=0, successes=6)"
+      },
+      {
+        "timestamp": "2025-11-01T05:44:17.038Z",
+        "type": "check",
+        "health": 40,
+        "message": "Checked for evolution: Not eligible yet (health=40%, failures=0, successes=6)"
+      },
+      {
+        "timestamp": "2025-11-01T05:43:35.195Z",
+        "type": "check",
+        "health": 40,
+        "message": "Checked for evolution: Not eligible yet (health=40%, failures=0, successes=6)"
+      },
+      {
+        "timestamp": "2025-11-01T05:43:35.191Z",
+        "type": "check",
+        "health": 40,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:43:05.195Z",
+        "type": "check",
+        "health": 45,
+        "message": "Checked for evolution: Not eligible yet (health=45%, failures=0, successes=6)"
+      },
+      {
+        "timestamp": "2025-11-01T05:42:35.191Z",
+        "type": "check",
+        "health": 45,
+        "message": "Checked for evolution: Not eligible yet (health=45%, failures=0, successes=6)"
+      },
+      {
+        "timestamp": "2025-11-01T05:42:35.190Z",
+        "type": "check",
+        "health": 45,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:40:56.218Z",
+        "type": "check",
+        "health": 50,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:39:56.213Z",
+        "type": "check",
+        "health": 55,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:38:56.211Z",
+        "type": "check",
+        "health": 60,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:37:56.210Z",
+        "type": "check",
+        "health": 65,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:36:56.208Z",
+        "type": "check",
+        "health": 70,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:35:56.206Z",
+        "type": "check",
+        "health": 75,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:34:56.205Z",
+        "type": "check",
+        "health": 80,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
       {
         "timestamp": "2025-11-01T05:33:44.054Z",
         "type": "check",

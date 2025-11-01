@@ -54,7 +54,8 @@ async function init() {
 
   // Evolution loop (every 30 seconds)
   const actions = await import('../actions/core.js');
-  const availableActions = Object.keys(actions);
+  const actionsModule = actions.default ?? actions;
+  const availableActions = Object.keys(actionsModule);
 
   setInterval(async () => {
     await evolveLoop(availableActions);
