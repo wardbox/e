@@ -112,6 +112,7 @@ GitHub token needs: `repo` scope for creating branches and PRs.
 ### Endpoint Code Execution
 Endpoints are pure JavaScript functions created with `new Function('input', 'actions', endpoint.code)`. This allows dynamic code generation while maintaining sandboxing through limited context.
 
+
 ### Health System
 - Spawn: 100 health
 - Success: +5 health
