@@ -5,6 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Response Style
 **CRITICAL**: Minimize token usage. Keep responses concise, skip pleasantries, avoid explanations unless asked. Save money.
 
+## Technology Preferences
+**NEVER use OpenAI/GPT.** This project uses Anthropic Claude exclusively. Fuck Sam Altman.
+
 ## Project Overview
 
 **Endpoint Evolution** - AI-driven API system where endpoints self-evolve, compete for survival, and create GitHub PRs to request new capabilities.
@@ -27,20 +30,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - Dashboard API endpoints
 
 2. **Endpoint Manager (`src/endpoints.ts`)** - Lifecycle management:
-   - `spawn(path)` - GPT-3.5 generates initial code from path name
+   - `spawn(path)` - Claude generates initial code from path name
    - `execute(path, input)` - Runs endpoint code with available actions
    - `decay()` - Natural selection: unused endpoints lose health and die
    - Endpoints stored as JSON with health, uses, failures, desperation
 
 3. **Evolution Engine (`src/evolution.ts`)** - AI-driven evolution:
    - Triggers when health < 50% and failures > successes
-   - Sends code + errors to GPT-3.5 for improvement
+   - Sends code + errors to Claude for improvement
    - Tests new code before deployment
    - Restores health on successful evolution
 
 4. **GitHub Integration (`src/github.ts`)** - PR automation:
    - Creates PRs when desperation >= 10 and health < 30%
-   - Generates new action requests via GPT
+   - Generates new action requests via Claude
    - Adds increasingly desperate PR comments over time
    - Monitors merged PRs to reload actions and restore health
 
@@ -95,7 +98,7 @@ bun run build
 
 Required `.env` variables:
 ```
-OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
 GITHUB_TOKEN=ghp_...
 GITHUB_OWNER=your-username
 GITHUB_REPO=endpoint-evolution-mvp
@@ -122,14 +125,14 @@ Endpoints are pure JavaScript functions created with `new Function('input', 'act
 - 8-9: Preparing PR draft
 - 10+: Opens PR, starts harassment campaign
 
-### GPT Prompts Strategy
+### Claude Prompts Strategy
 Keep prompts minimal and constraint-focused:
 - Spawn: "Write a JavaScript function body for an endpoint called [path]. You can only use the available actions: [list actions]. Return only code, no explanation."
 - Evolution: "This endpoint is failing. Current code: [code]. Errors: [errors]. Available actions: [list]. Write improved code."
 - Action request: "This endpoint keeps failing with error: [error]. What new action would help? Write a one-line JavaScript function."
 
 ### PR Creation Flow
-1. GPT generates action based on endpoint's errors
+1. Claude generates action based on endpoint's errors
 2. Create branch: `endpoint-[path]-[timestamp]`
 3. Add file: `actions/[endpoint-name].js`
 4. PR title: "[path] is dying - needs [action name]"

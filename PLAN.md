@@ -24,12 +24,12 @@ endpoint-evolution/
 │   └── endpoints.json   # Simple JSON storage
 ├── actions/             # Merged PRs add capabilities here
 │   └── core.ts          # Starting capabilities (just "return")
-└── .env                 # OpenAI API key + GitHub token
+└── .env                 # Anthropic API key + GitHub token
 ```
 
 ## Environment Setup
 ```
-OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
 GITHUB_TOKEN=ghp_...
 GITHUB_OWNER=your-username
 GITHUB_REPO=endpoint-evolution-mvp
@@ -74,7 +74,7 @@ PORT=3000
 ### Core Functions
 
 #### `spawn(path)`
-- Use GPT-3.5 to generate initial code based on path name
+- Use Claude to generate initial code based on path name
 - Prompt: "Write a JavaScript function body for an endpoint called [path]. You can only use the available actions: [list actions]. Return only code, no explanation."
 - Start with 100 health
 - Announce birth in drama feed
@@ -108,7 +108,7 @@ PORT=3000
 - No existing PR
 
 ### Evolution Process
-1. Send current code + errors + stats to GPT-3.5
+1. Send current code + errors + stats to Claude
 2. Prompt: "This endpoint is failing. Current code: [code]. Errors: [errors]. Available actions: [list]. Write improved code."
 3. Test new code with sample input
 4. If valid: update endpoint code, restore 20 health
@@ -124,7 +124,7 @@ PORT=3000
 ### `createPR(endpoint)`
 
 #### Generate Action Request
-Ask GPT-3.5: "This endpoint keeps failing with error: [error]. What new action would help? Write a one-line JavaScript function. Example: 'uppercase': (input) => input.toUpperCase()"
+Ask Claude: "This endpoint keeps failing with error: [error]. What new action would help? Write a one-line JavaScript function. Example: 'uppercase': (input) => input.toUpperCase()"
 
 #### Create GitHub PR
 1. Use GitHub API to create branch: `endpoint-[path]-[timestamp]`

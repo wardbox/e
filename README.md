@@ -30,7 +30,7 @@ cd client && bun run build
 
 ```bash
 cp .env.example .env
-# Add your OpenAI & GitHub tokens
+# Add your Anthropic & GitHub tokens
 ```
 
 ## Structure
