@@ -239,7 +239,7 @@
             </div>
             ${e.lastError ? `<div class="error">${e.lastError}</div>` : ''}
             <div class="code">${e.code}</div>
-            <details style="margin-top: 10px;" ${openTimelines.has(e.path) ? 'open' : ''} ontoggle="toggleTimeline('${e.path}')">
+            <details style="margin-top: 10px;" ${openTimelines.has(e.path) ? 'open' : ''} data-path="${e.path}">
               <summary style="cursor: pointer; font-size: 12px; font-weight: 600;">Timeline (${(e.timeline || []).length} events)</summary>
               <div style="max-height: 200px; overflow-y: auto; margin-top: 5px; background: #fafafa; padding: 8px; border-radius: 3px;">
                 ${timelineHtml || '<p style="color: #999; font-size: 11px;">No events yet</p>'}
@@ -251,6 +251,13 @@
 
       document.getElementById('endpoints').innerHTML = html;
     }
+
+    document.addEventListener('toggle', (event) => {
+      if (event.target.matches('details[data-path]')) {
+        const path = event.target.dataset.path;
+        toggleTimeline(path);
+      }
+    }, true);
 
     refresh();
     setInterval(refresh, 2000);

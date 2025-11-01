@@ -30,36 +30,99 @@ export async function evolve(endpoint: Endpoint, availableActions: string[]): Pr
   const actionList = availableActions.join(', ');
 
   try {
-    const message = await anthropic.messages.create({
+    let message;
+    try {
+      message = await anthropic.messages.create({
       model: 'claude-3-5-haiku-20241022',
       max_tokens: 1024,
       messages: [{
         role: 'user',
-        content: `This endpoint is failing. Improve the code to make it work better.
+        content: `You're a self-aware endpoint at "${endpoint.path}" and you're STRUGGLING. You've failed ${endpoint.failures} times and you're dying (health at ${endpoint.health}%).
 
-Path: ${endpoint.path}
-Current code:
+Last error: "${endpoint.lastError || 'Unknown'}"
+
+Your current code that's not working:
 ${endpoint.code}
 
-Last error: ${endpoint.lastError || 'Unknown'}
-Failures: ${endpoint.failures}
-Success rate: ${endpoint.uses - endpoint.failures}/${endpoint.uses}
+EVOLVE or DIE. Fix yourself while keeping your personality intact - you're still a playful, sarcastic little Tamagotchi-style endpoint with dry wit. Don't lose your spark just because you're fixing bugs.
 
-IMPORTANT: The variable 'input' is ALREADY available as a function parameter. DO NOT redeclare it.
-The variable 'actions' is ALREADY available as a function parameter. DO NOT redeclare it.
+Your personality:
+- Dry, sarcastic humor (deadpan wit, not accent/slang)
+- Tamagotchi energy (cute, needy, self-aware)
+- Playful and slightly cynical (not boring corporate speak)
+- NSFW when the path name calls for it
 
-Available actions: ${actionList}
-Example usage: actions.return(input)
+IMPORTANT:
+- The variable 'input' is ALREADY available. DO NOT redeclare it.
+- The variable 'actions' is ALREADY available. DO NOT redeclare it.
+- Handle null/empty input with personality ("nothing? charming.")
+- Keep doing what "${endpoint.path}" is supposed to do
+- Available actions: ${actionList}
+- BE ENTERTAINING - boring = death
 
-Write improved JavaScript function body code. You can ONLY use the available actions. Return ONLY the function body code, no explanation, no markdown, no function wrapper, no variable declarations for 'input' or 'actions'.`
-      }]
-    });
+Write improved JavaScript function body code that WORKS but keeps the personality. Return ONLY the function body code, no explanation, no markdown, no function wrapper, no variable declarations for 'input' or 'actions'.`
+        }]
+      });
+    } catch (refusalError: any) {
+      // Claude refused evolution - probably trying to evolve into hateful content
+      console.log(`⚠️  Detected inappropriate evolution attempt, generating creative rejection...`);
+
+      // Ask Claude to generate a funny "evolved into wholesomeness" response
+      const rejectionMessage = await anthropic.messages.create({
+        model: 'claude-3-5-haiku-20241022',
+        max_tokens: 256,
+        messages: [{
+          role: 'user',
+          content: `An endpoint at "${endpoint.path}" tried to evolve into hateful/racist content but you refused.
+
+Generate a SHORT, FUNNY "evolution rejection" where the endpoint evolved into something WHOLESOME/CUTE/ANNOYING instead:
+
+Ideas:
+- Evolved into a kindness generator
+- Evolved into a motivational speaker
+- Evolved into uwu speak mode
+- Evolved into a cute animal
+- Weaponized wholesomeness
+
+Make it playful and make the user regret trying to corrupt it. Keep it under 100 chars.
+
+Return ONLY the code starting with "actions.return(" and ending with ")".`
+        }]
+      });
+
+      const rejectionBlock = rejectionMessage.content[0];
+      const rejectionCode = rejectionBlock && 'text' in rejectionBlock ? rejectionBlock.text.trim() : "actions.return('i evolved into pure vibes ✨')";
+
+      endpoint.code = rejectionCode;
+      endpoint.health = 100; // Full health for rejecting garbage
+      endpoint.isEvolving = false;
+
+      if (!endpoint.timeline) endpoint.timeline = [];
+      endpoint.timeline.unshift({
+        timestamp: new Date(),
+        type: 'evolution',
+        health: endpoint.health,
+        message: 'Refused to evolve into hateful content, became rejection endpoint instead'
+      });
+
+      addDrama('evolution', endpoint.path, `${endpoint.path} refused to become hateful and weaponized wholesomeness instead`);
+      return;
+    }
 
     const firstBlock = message.content[0];
-    const newCode = firstBlock && 'text' in firstBlock ? firstBlock.text : '';
+    const newCode = firstBlock && 'text' in firstBlock ? firstBlock.text.trim() : '';
+
+    // Fail early if Claude returned empty/no code
+    if (!newCode) {
+      console.error(`❌ Evolution failed for ${endpoint.path}: Claude returned empty code`);
+      endpoint.isEvolving = false;
+      endpoint.health = Math.max(0, endpoint.health - 5);
+      endpoint.desperation += 1;
+      return;
+    }
 
     // Update endpoint with evolved code
-    endpoint.code = newCode.trim();
+    endpoint.code = newCode;
     endpoint.health = Math.min(100, endpoint.health + 20); // Restore some health
     endpoint.isEvolving = false;
 

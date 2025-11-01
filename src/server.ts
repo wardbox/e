@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { watch } from 'node:fs';
 import { loadEndpoints, loadActions, execute, getAll, decay } from './endpoints';
 import { evolveLoop } from './evolution';
 import { getEvents } from './drama';
@@ -64,10 +65,18 @@ async function init() {
     await decay();
   }, 60000);
 
+  // Watch endpoints.json for changes
+  watch('data/endpoints.json', async (eventType) => {
+    if (eventType === 'change') {
+      console.log('📝 endpoints.json changed, reloading...');
+      await loadEndpoints();
+    }
+  });
+
   console.log(`🚀 Server running on http://localhost:${port}`);
 }
 
-init();
+await init();
 
 export default {
   port,

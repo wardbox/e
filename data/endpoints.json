@@ -2,14 +2,20 @@
   {
     "path": "/reverse",
     "code": "if (typeof input !== 'string') {\n  return '';\n}\nreturn input.split('').reverse().join('');",
-    "health": 65,
-    "uses": 10,
+    "health": 70,
+    "uses": 11,
     "failures": 10,
-    "lastUsed": "2025-11-01T04:46:17.053Z",
+    "lastUsed": "2025-11-01T05:03:14.299Z",
     "isEvolving": false,
     "desperation": 10,
     "lastError": "null is not an object (evaluating 'input.split')",
     "timeline": [
+      {
+        "timestamp": "2025-11-01T05:03:14.299Z",
+        "type": "success",
+        "health": 70,
+        "message": "Executed successfully"
+      },
       {
         "timestamp": "2025-11-01T04:46:17.053Z",
         "type": "success",
@@ -123,24 +129,38 @@
         "type": "failure",
         "health": 70,
         "message": "null is not an object (evaluating 'input.split')"
-      },
-      {
-        "timestamp": "2025-11-01T04:43:16.661Z",
-        "type": "failure",
-        "health": 80,
-        "message": "null is not an object (evaluating 'input.split')"
       }
     ]
   },
   {
     "path": "/",
     "code": "actions.return(\"Hello, World!\");",
-    "health": 100,
+    "health": 85,
     "uses": 6,
     "failures": 0,
     "lastUsed": "2025-11-01T04:29:07.433Z",
     "isEvolving": false,
-    "desperation": 0
+    "desperation": 0,
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T05:33:44.054Z",
+        "type": "check",
+        "health": 85,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:30:50.191Z",
+        "type": "check",
+        "health": 90,
+        "message": "Decayed -5 health (unused for 1h)"
+      },
+      {
+        "timestamp": "2025-11-01T05:29:50.186Z",
+        "type": "check",
+        "health": 95,
+        "message": "Decayed -5 health (unused for 1h)"
+      }
+    ]
   },
   {
     "path": "/favicon.ico",
@@ -375,6 +395,276 @@
         "type": "success",
         "health": 100,
         "message": "Executed successfully"
+      }
+    ]
+  },
+  {
+    "path": "/titties",
+    "code": "if (!input) {\n    return actions.return(\"Oi bruv, ya can't just summon me without givin' me somethin' to work with! *wiggles digital tatas* 🙃\")\n}\n\nconst boobAscii = [\n    \"( . Y . )\",\n    \"(  .  Y  .  )\",\n    \"( o Y o )\",\n    \"( ^ Y ^ )\"\n]\n\nconst randomTitty = boobAscii[Math.floor(Math.random() * boobAscii.length)]\n\nconst responses = [\n    `${randomTitty} Proper cheeky request, innit?`,\n    `${randomTitty} Oi mate, here's yer digital assets!`,\n    `${randomTitty} Blimey, someone's feeling frisky today!`,\n    `${randomTitty} Tatas out for the lads! 🇬🇧`\n]\n\nreturn actions.return(\n    responses[Math.floor(Math.random() * responses.length)]\n)",
+    "health": 100,
+    "uses": 16,
+    "failures": 0,
+    "lastUsed": "2025-11-01T05:15:44.355Z",
+    "isEvolving": false,
+    "desperation": 0,
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T05:15:44.355Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:44.214Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:44.056Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:43.894Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:43.089Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:31.915Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:31.735Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:31.568Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:31.399Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:31.199Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:30.266Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:25.985Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:17.358Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:17.357Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:17.328Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:17.320Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:15:17.319Z",
+        "type": "spawn",
+        "health": 100,
+        "message": "Spawned with AI-generated code"
+      }
+    ]
+  },
+  {
+    "path": "/ass",
+    "code": "if (!input) {\n  return actions.return(\"Oh, empty input. How wonderfully noncommittal of you. 🙄\")\n}\n\nconst responses = {\n  peek: [\"Cheeky, aren't we? 👀\", \"Looking for a little... perspective?\", \"Caught you peeking!\"],\n  touch: [\"Hands to yourself, darling\", \"Not without dinner first\", \"Bold move.\"],\n  default: [\"Is this what passes for interaction these days?\", \"How... unexpected.\", \"Well, this is awkward.\"]\n}\n\nconst selectedResponse = responses[input.toLowerCase()] \n  || responses.default[Math.floor(Math.random() * responses.default.length)]\n\nreturn actions.return(selectedResponse)",
+    "health": 100,
+    "uses": 13,
+    "failures": 0,
+    "lastUsed": "2025-11-01T05:27:55.810Z",
+    "isEvolving": false,
+    "desperation": 0,
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T05:27:55.810Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:55.628Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:55.462Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:55.280Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:55.096Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:54.685Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:53.606Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:46.191Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:45.086Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:43.841Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:40.753Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:38.534Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:34.921Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:27:34.920Z",
+        "type": "spawn",
+        "health": 100,
+        "message": "Spawned with AI-generated code"
+      }
+    ]
+  },
+  {
+    "path": "/rainbow-friendship",
+    "code": "actions.return('🌈✨ Aww, looks like someone needs a hug and kindness training! UwU')",
+    "health": 100,
+    "uses": 7,
+    "failures": 0,
+    "lastUsed": "2025-11-01T05:28:15.331Z",
+    "isEvolving": false,
+    "desperation": 0,
+    "timeline": [
+      {
+        "timestamp": "2025-11-01T05:28:15.332Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:28:15.179Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:28:15.008Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:28:14.849Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:28:14.256Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:28:10.760Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:28:05.533Z",
+        "type": "success",
+        "health": 100,
+        "message": "Executed successfully"
+      },
+      {
+        "timestamp": "2025-11-01T05:28:05.531Z",
+        "type": "spawn",
+        "health": 100,
+        "message": "Spawned as rejection endpoint (hateful content attempted, path renamed)"
       }
     ]
   }

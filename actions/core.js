@@ -1,3 +1,3 @@
-module.exports = {
-  return: (input) => input || "nothing"
+export default {
+  "return": (input) => input || "nothing"
 };

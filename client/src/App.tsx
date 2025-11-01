@@ -4,34 +4,7 @@ import { Progress } from '@/components/ui/progress';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-
-interface EndpointEvent {
-  timestamp: Date;
-  type: 'spawn' | 'success' | 'failure' | 'evolution' | 'check';
-  health: number;
-  message: string;
-}
-
-interface Endpoint {
-  path: string;
-  code: string;
-  health: number;
-  uses: number;
-  failures: number;
-  lastError?: string;
-  lastUsed: Date;
-  isEvolving: boolean;
-  prNumber?: number;
-  desperation: number;
-  timeline: EndpointEvent[];
-}
-
-interface DramaEvent {
-  timestamp: Date;
-  type: 'spawn' | 'death' | 'evolution' | 'pr' | 'beg';
-  path: string;
-  message: string;
-}
+import type { Endpoint, EndpointEvent, DramaEvent } from '../../shared/types';
 
 export default function App() {
   const [endpoints, setEndpoints] = useState<Endpoint[]>([]);
@@ -209,25 +182,30 @@ export default function App() {
                       <pre className="text-xs bg-muted p-3 rounded-md overflow-auto">{endpointResults[endpoint.path]}</pre>
                     )}
 
-                    <details open={openTimelines.has(endpoint.path)} onToggle={() => toggleTimeline(endpoint.path)}>
-                      <summary className="cursor-pointer text-sm font-medium">
-                        Timeline ({endpoint.timeline?.length || 0} events)
-                      </summary>
-                      <div className="mt-3 space-y-1 max-h-48 overflow-y-auto">
-                        {endpoint.timeline?.map((event, idx) => (
-                          <div key={idx} className="text-xs p-2 border-l-2 border-muted-foreground/20 pl-3">
-                            <div className="flex items-center gap-2">
-                              <span>{getEventEmoji(event.type)}</span>
-                              <span className="text-muted-foreground">
-                                {new Date(event.timestamp).toLocaleTimeString()}
-                              </span>
-                              <span className="text-muted-foreground">Health: {event.health}%</span>
+                    <div className="mt-2">
+                      <button
+                        onClick={() => toggleTimeline(endpoint.path)}
+                        className="cursor-pointer text-sm font-medium hover:underline"
+                      >
+                        Timeline ({endpoint.timeline?.length || 0} events) {openTimelines.has(endpoint.path) ? '▼' : '▶'}
+                      </button>
+                      {openTimelines.has(endpoint.path) && (
+                        <div className="mt-3 space-y-1 max-h-48 overflow-y-auto">
+                          {endpoint.timeline?.map((event, idx) => (
+                            <div key={idx} className="text-xs p-2 border-l-2 border-muted-foreground/20 pl-3">
+                              <div className="flex items-center gap-2">
+                                <span>{getEventEmoji(event.type)}</span>
+                                <span className="text-muted-foreground">
+                                  {new Date(event.timestamp).toLocaleTimeString()}
+                                </span>
+                                <span className="text-muted-foreground">Health: {event.health}%</span>
+                              </div>
+                              <div className="mt-1">{event.message}</div>
                             </div>
-                            <div className="mt-1">{event.message}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </details>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               ))
